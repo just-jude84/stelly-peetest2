@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Programs - Stelly-Pee School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #1a4b8c;
+            --secondary: #f37f20;
+            --light: #f5f5f5;
+            --dark: #333;
+            --accent: #6cbbd1;
+            --green: #4caf50;
+            --purple: #9c27b0;
+        }
+        
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 15px 0;
+            background-color: #eee;
+        }
+        
+        .breadcrumb-content {
+            display: flex;
+            list-style: none;
+        }
+        
+        .breadcrumb-content li {
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb-content li:not(:last-child)::after {
+            content: ">";
+            margin-left: 10px;
+            color: #777;
+        }
+        
+        .breadcrumb-content a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb-content a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(rgba(26, 75, 140, 0.9), rgba(26, 75, 140, 0.9)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3') center/cover no-repeat;
+            color: white;
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .page-title p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Programs Intro */
+        .programs-intro {
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        .programs-intro p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        /* Programs Navigation */
+        .programs-nav {
+            background-color: var(--light);
+            padding: 20px 0;
+        }
+        
+        .programs-nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .programs-nav-btn {
+            padding: 10px 20px;
+            background-color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .programs-nav-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .programs-nav-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Programs Section */
+        .programs-section {
+            padding: 50px 0;
+        }
+        
+        .program-category {
+            margin-bottom: 60px;
+        }
+        
+        .program-category h2 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--secondary);
+            display: inline-block;
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .program-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .program-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .program-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .program-card:hover .program-image img {
+            transform: scale(1.1);
+        }
+        
+        .program-info {
+            padding: 25px;
+        }
+        
+        .program-info h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .program-info p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .program-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .program-detail {
+            display: flex;
+            align-items: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .program-detail i {
+            margin-right: 5px;
+            color: var(--secondary);
+        }
+        
+        .program-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+            text-align: center;
+            width: 100%;
+        }
+        
+        .program-btn:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+        
+        /* Special Programs */
+        .special-programs {
+            background-color: var(--light);
+            padding: 60px 0;
+        }
+        
+        .special-program {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+            align-items: center;
+        }
+        
+        .special-program:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .special-program-content {
+            flex: 1;
+        }
+        
+        .special-program-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .special-program-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .special-program h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+        
+        .special-program p {
+            margin-bottom: 20px;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 60px 0;
+        }
+        
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--accent);
+            opacity: 0.3;
+            position: absolute;
+        }
+        
+        .testimonial-text::before {
+            top: -20px;
+            left: -10px;
+        }
+        
+        .testimonial-text::after {
+            bottom: -40px;
+            right: -10px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .testimonial-role {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(rgba(26, 75, 140, 0.9), rgba(26, 75, 140, 0.9)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3') center/cover no-repeat;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--secondary);
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--secondary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .special-program,
+            .special-program:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .programs-nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .programs-nav-btn {
+                width: 200px;
+                margin-bottom: 10px;
+            }
+            
+            .page-title h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap logo-icon"></i>
+                <h1>Stelly-Pee School</h1>
+            </div>
+            <nav>
+                <ul>
+                   <li>  <a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="admission.html">Admissions</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb-content">
+                <li><a href="index.html">Home</a></li>
+                <li>Academic Programs</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Title -->
+    <div class="page-title">
+        <div class="container">
+            <h1>Stelly-Pee School Programs</h1>
+            <p>Discover our comprehensive educational programs designed to nurture young minds and prepare them for future success</p>
+        </div>
+    </div>
+
+    <!-- Programs Intro -->
+    <section class="programs-intro">
+        <div class="container">
+            <p>At Stelly-Pee School, we offer a diverse range of academic programs tailored to meet the unique needs and interests of every student. Our curriculum is designed to foster intellectual curiosity, critical thinking, and a lifelong love of learning.</p>
+        </div>
+    </section>
+
+    <!-- Programs Navigation -->
+    <section class="programs-nav">
+        <div class="container programs-nav-container">
+            <button class="programs-nav-btn active">Elementary School</button>
+            <button class="programs-nav-btn">Middle School</button>
+            <button class="programs-nav-btn">High School</button>
+            <button class="programs-nav-btn">STEM Programs</button>
+            <button class="programs-nav-btn">Arts Programs</button>
+            <button class="programs-nav-btn">Sports</button>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs-section">
+        <div class="container">
+            <!-- Elementary School Programs -->
+            <div class="program-category">
+                <h2>Elementary School Programs</h2>
+                <div class="programs-grid">
+                    <div class="program-card">
+                        <div class="program-image">
+                            <img src="interactive.jpg">
+                        </div>
+                        <div class="program-info">
+                            <h3>Kindergarten</h3>
+                            <p>Our kindergarten program focuses on developing social skills, early literacy, and numeracy through play-based learning.</p>
+                            <div class="program-details">
+                                <span class="program-detail"><i class="fas fa-clock"></i> Full Day</span>
+                                <span class="program-detail"><i class="fas fa-user"></i> 5-6 years</span>
+                            </div>
+                            <a href="#" class="program-btn">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <div class="program-card">
+                        <div class="program-image">
+                            <img src="6-8.jpg">
+                        </div>
+                        <div class="program-info">
+                            <h3>Grades 1-2</h3>
+                            <p>Building strong foundations in reading, writing, and mathematics while exploring science and social studies.</p>
+                            <div class="program-details">
+                                <span class="program-detail"><i class="fas fa-clock"></i> Full Day</span>
+                                <span class="program-detail"><i class="fas fa-user"></i> 6-8 years</span>
+                            </div>
+                            <a href="#" class="program-btn">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <div class="program-card">
+                        <div class="program-image">
+                            <img src="angels.jpg">
+                        </div>
+                        <div class="program-info">
+                            <h3>Grades 3-5</h3>
+                            <p>Developing critical thinking skills through advanced coursework in core subjects and introduction to specialized topics.</p>
+                            <div class="program-details">
+                                <span class="program-detail"><i class="fas fa-clock"></i> Full Day</span>
+                                <span class="program-detail"><i class="fas fa-user"></i>3-5 years</span>
+                            </div>
+                            <a href="#" class="program-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Middle School Programs -->
+            <div class="program-category">
+                <h2>Middle School Programs</h2>
+                <div class="programs-grid">
+                    <div class="program-card">
+                        <div class="program-image">
+                            <img src="img3.jpeg">
+                        </div>
+                        <div class="program-info">
+                            <h3>middle school</h3>
+                            <p>Transition program with team teaching approach and emphasis on organizational skills and study habits.</p>
+                            <div class="program-details">
+                                <span class="program-detail"><i class="fas fa-clock"></i> 8:00 AM - 3:00 PM</span>
+                                <span class="program-detail"><i class="fas fa-user"></i> 11-12 years</span>
+                            </div>
+                            <a href="#" class="program-btn">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <div class="program-card">
+                        <div class="program-image">
+                            <img src="img4.jpeg">
+                        </div>
+                        <div class="program-info">
+                            <h3>Grades 7-8</h3>
+                            <p>Rigorous academic program with elective choices and emphasis on critical thinking and problem-solving.</p>
+                            <div class="program-details">
+                                <span class="program-detail"><i class="fas fa-clock"></i> 8:00 AM - 3:30 PM</span>
+                                <span class="program-detail"><i class="fas fa-user"></i> 12-14 years</span>
+                            </div>
+                            <a href="#" class="program-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- High School Programs -->
+            <div class="program-category">
+                <h2>High School Programs</h2>
+                <div class="programs-grid">
+                    <div class="program-card">
+                        <div class="program-image">
+                            <img src="G78.jpg">
+                        </div>
+                        <div class="program-info">
+                            <h3>College Preparatory</h3>
+                            <p>Comprehensive curriculum designed to prepare students for competitive university admissions.</p>
+                            <div class="program-details">
+                                <span class="program-detail"><i class="fas fa-graduation-cap"></i> Advanced</span>
+                                <span class="program-detail"><i class="fas fa-user"></i> 14-18 years</span>
+                            </div>
+                            <a href="#" class="program-btn">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <div class="program-card">
+                        <div class="program-image">
+                            <img src="img6.jpeg">
+                        </div>
+                        <div class="program-info">
+                            <h3>Advanced Placement</h3>
+                            <p>College-level courses in various subjects allowing students to earn college credit while in high school.</p>
+                            <div class="program-details">
+                                <span class="program-detail"><i class="fas fa-graduation-cap"></i> College Level</span>
+                                <span class="program-detail"><i class="fas fa-user"></i> 15-18 years</span>
+                            </div>
+                            <a href="#" class="program-btn">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <div class="program-card">
+                        <div class="program-image">
+                            <img src="stem.jpg">
+                        </div>
+                        <div class="program-info">
+                            <h3>STEM Academy</h3>
+                            <p>Specialized program focusing on Science, Technology, Engineering, and Mathematics with hands-on learning.</p>
+                            <div class="program-details">
+                                <span class="program-detail"><i class="fas fa-flask"></i> Science Focus</span>
+                                <span class="program-detail"><i class="fas fa-user"></i> 14-18 years</span>
+                            </div>
+                            <a href="#" class="program-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Programs -->
+    <section class="special-programs">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--primary); margin-bottom: 40px;">Special Programs</h2>
+            
+            <div class="special-program">
+                <div class="special-program-content">
+                    <h3>CODE KNOWLEDGE</h3>
+                    <p>Black STEM educators through professional learning, research and innovation.  We also pledge our commitment to promoting, inspiring, and fusing STEM education for all.</p>
+                    <p>Program includes: band, orchestra, choir, painting, sculpture, digital arts, and theater production.</p>
+                    <a href="#" class="btn">Discover Arts Program</a>
+                </div>
+                <div class="special-program-image">
+                    <img src="stem3.jpg">
+                </div>
+            </div>
+            
+            <div class="special-program">
+                <div class="special-program-content">
+                    <h3>Athletics & Sports</h3>
+                    <p>Stelly-Pee School offers a competitive athletics program with a focus on skill development, teamwork, and sportsmanship. Our teams regularly compete at regional and state levels.</p>
+                    <p>Sports offered: soccer, basketball, compulsory coding, track and field, swimming, tennis, and cross country.</p>
+                    <a href="#" class="btn">View Sports Teams</a>
+                </div>
+                <div class="special-program-image">
+                    <img src="img7.jpg">
+                </div>
+            </div>
+            
+            <div class="special-program">
+                <div class="special-program-content">
+                    <h3>International Exchange Program</h3>
+                    <p>Our global education initiative allows students to participate in cultural exchange programs with partner schools around the world. This program broadens perspectives and fosters global citizenship.</p>
+                    <p>Exchange programs available in: France, Japan, Spain, Germany, and Australia.</p>
+                    <a href="#" class="btn">Learn About Exchanges</a>
+                </div>
+                <div class="special-program-image">
+                    <img src="https://images.unsplash.com/photo-1534482426-5c5c35feb5ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Exchange Program">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--primary); margin-bottom: 40px;">What Parents & Students Say</h2>
+            
+            <div class="testimonials-container">
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        <p>The STEM program at StellyPee has ignited my passion for engineering. The hands-on projects and dedicated teachers have truly made a difference in my educational journey.</p>
+                    </div>
+                    <div class="testimonial-author">- Osamudiamen</div>
+                    <div class="testimonial-role">Grade 12 Student</div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        <p>As a Stelly-Pee student, the support I received through the skills Program was incredible. I made lifelong friends and gained perspectives that changed how I see the world.</p>
+                    </div>
+                    <div class="testimonial-author">- Toba Muiz</div>
+                    <div class="testimonial-role">Grade 7 Student</div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        <p>The coding program at Stelly-Pee helped me discover my passion for programming. Now I'm pursuing am adepth knowledge in software development, thanks to the incredible mentorship I received.</p>
+                    </div>
+                    <div class="testimonial-author">- Ajila Zuriel</div>
+                    <div class="testimonial-role">Grade 8 Student</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container cta-content">
+            <h2>Ready to Explore Our Programs?</h2>
+            <p>Schedule a tour or speak with our admissions team to discover which program is right for your child.</p>
+            <a href="#" class="btn">Schedule a Visit</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Stelly-Pee School</h3>
+                    <p>Excellence in education since 2016. Committed to nurturing future leaders through holistic education.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Programs</a></li>
+                        <li><a href="#">Admissions</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Programs</h3>
+                    <ul>
+                        <li><a href="#">Elementary School</a></li>
+                        <li><a href="#">Middle School</a></li>
+                        <li><a href="#">High School</a></li>
+                        <li><a href="#">Summer Programs</a></li>
+                        <li><a href="#">Sports</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Seyi Omoguwa str. off Otunla Road,Otunla Ibeju-Lekki Lagos</li>
+                        <li><i class="fas fa-phone"></i>08054598983,08036953142</li>
+                        <li><i class="fas fa-envelope"></i>stellypeemontessorischool@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 By Spring Code Developers. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple navigation functionality
+        document.querySelectorAll('.programs-nav-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.programs-nav-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+                
+                // Scroll to corresponding section (simplified)
+                const categoryTitles = document.querySelectorAll('.program-category h2');
+                for (let title of categoryTitles) {
+                    if (title.textContent.includes(button.textContent)) {
+                        title.scrollIntoView({behavior: 'smooth'});
+                        break;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
